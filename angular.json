@@ -81,12 +81,14 @@
 							"src/assets"
 						],
 						"styles": [
-							"src/styles.scss"
+							"src/styles.scss",
+              "node_modules/@easy-craft/ui-core/src/lib/styles/styles.scss"
 						],
 						"scripts": []
 					},
 					"configurations": {
 						"production": {
+              "baseHref": "/gateway/mf/template/",
 							"budgets": [
 								{
 									"type": "initial",
@@ -121,7 +123,7 @@
 					},
 					"defaultConfiguration": "development",
 					"options": {
-						"port": 4201
+						"port": 4200
 					}
 				}
 			}

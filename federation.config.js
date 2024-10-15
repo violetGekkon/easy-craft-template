@@ -2,7 +2,7 @@ const { withNativeFederation, shareAll } = require('@angular-architects/native-f
 
 module.exports = withNativeFederation({
 
-  name: 'mfe',
+  name: 'mfeName',
 
   exposes: {
     './Component': './src/app/app.component.ts',
@@ -17,7 +17,7 @@ module.exports = withNativeFederation({
     'rxjs/ajax',
     'rxjs/fetch',
     'rxjs/testing',
-    'rxjs/webSocket',
+    'rxjs/webSocket'
     // Add further packages you don't need at runtime
   ]
 
