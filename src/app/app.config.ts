@@ -4,6 +4,7 @@ import {provideRouter} from '@angular/router';
 
 import MFE_ROUTES from './app.routes';
 import {authInterceptor, AuthService, GATEWAY_URL, initializeUser} from "@easy-craft/auth";
+import {environment} from "../environments/environment";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     ),
     AuthService,
     {
-      provide: GATEWAY_URL, useValue: 'http://127.0.0.1:8080',
+      provide: GATEWAY_URL, useValue: environment.bffUrl,
     },
     {
       provide: APP_INITIALIZER,
