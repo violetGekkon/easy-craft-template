@@ -1,0 +1,15 @@
+version: "2.0"
+
+services:
+  dashboard:
+    image: easy-craft-template:latest
+    container_name: easy-craft-template
+    networks:
+      - easy-craft-network # Connect to common network
+    ports:
+      - "127.0.0.1:4202:4200"
+
+networks:
+  easy-craft-network:
+    external: true  # Network already present on host
+

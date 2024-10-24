@@ -1,0 +1,50 @@
+stages:
+  - build
+  - docker_build
+#  - deploy
+
+# Указываем образ Docker для сборки с нужной версией Node.js
+image: node:18.19.0 # Указываем версию Node.js
+
+# Кэширование зависимостей для ускорения сборок
+cache:
+  paths:
+    - node_modules/
+
+# Определяем задачу сборки
+build_job:
+  stage: build
+  tags:
+    - docker
+  script:
+    - npm ci # Устанавливаем зависимости
+    - npm run build --configuration=production # Выполняем сборку Angular-приложения
+  artifacts:
+    paths:
+      - dist/ # Сохраняем собранные артефакты
+  only:
+    - main # Выполняем сборку только при пуше в ветку main
+
+docker_build_job:
+  stage: docker_build
+  tags:
+    - shell
+  dependencies:
+    - build_job
+  script:
+    # Собираем Docker-образ с использованием Dockerfile из проекта
+    - echo $CI_PROJECT_NAME
+    # - docker build --network host -t easy-craft-template:latest .
+
+deploy_job:
+  stage: deploy
+  tags:
+    - shell
+  script:
+    # Останавливаем и удаляем существующий контейнер, если он есть
+    - docker-compose down
+    # Разворачиваем контейнеры с помощью docker-compose
+    - echo "Starting deploy with docker-compose"
+    - docker-compose up -d
+  only:
+    - main
